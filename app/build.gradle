@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+// 添加插件
+apply plugin: 'com.mob.sdk'
+
+//使用greendao
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.example.platform"
+        minSdkVersion 29
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    //greendao配置
+    greendao {
+        //版本号，升级时可配置
+        schemaVersion 1
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // 在MobSDK的扩展中注册SMSSDK的相关信息
+    MobSDK {
+        appKey "3133d5f814135"
+        appSecret "5b01d726c5dbe8e64070c38ada4a2b3d"
+        SMSSDK {}
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    //新增的
+    implementation 'fm.jiecao:jiecaovideoplayer:5.5.2'
+    testImplementation 'junit:junit:4.12'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'org.litepal.guolindev:core:3.2.2'
+    implementation 'com.lzy.net:okgo:2.1.4'
+    implementation 'com.lzy.net:okrx:0.1.2'
+    implementation 'com.lzy.net:okserver:1.1.3'
+    implementation 'org.greenrobot:greendao:3.3.0'
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation files('libs/mysql-connector-java-5.1.30.jar')
+}
